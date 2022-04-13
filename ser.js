@@ -24,12 +24,21 @@ var allstu = {};
 app.get('/allstu', (req, res) => {
 	let stulist = "";
 	Object.entries(allstu).forEach(([key, value]) => {
-		stulist += `\"${key}\":\"${value}\"\n`
+		stulist += `\"${key}\":\"${value}\"<br>`
 	})
 	res.send(stulist);
+});
+
+app.get('/searchstu', (req, res) => {
+	res.send(stulist[req.query.id]);
 });
 
 app.get('/addstu', (req, res) => {
 	allstu[req.query.id] = req.query.name;
 	res.send(`added ${req.query.id} : ${req.query.name}`);
+});
+
+app.get('/delstu', (req, res) => {
+	delete allstu[req.query.id];
+	res.send(`deleted ${req.query.id}`);
 });

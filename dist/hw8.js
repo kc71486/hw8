@@ -18,10 +18,25 @@ function setForms() {
 			document.getElementById("studentadd_show").innerHTML = data;
 		});
 	};
+	document.getElementById("studentdelete_submit").onclick = (event) => {
+		event.preventDefault();
+		$.get('/delstu', {
+			id: document.querySelector("#studentdelete [name=student_id]").value,
+		}, (data) => {
+			document.getElementById("studentdelete_show").innerHTML = data;
+		});
+	};
 }
 
 function naiveRequest() {
-	var req = XMLHttpRequest();
+	let xhttp = XMLHttpRequest();
+	xhttp.send({
+		id: document.querySelector("#studentsearch [name=student_id]").value
+	});
+	xhttp.onload = () => {
+		document.getElementById("studentadd_show").innerHTML = "hello, " + xhttp.responseText;
+	};
+	xhttp.open("GET", "/searchstu", true);
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
