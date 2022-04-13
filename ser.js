@@ -26,7 +26,7 @@ app.get('/allstu', (req, res) => {
 	Object.entries(allstu).forEach(([key, value]) => {
 		stulist += `\"${key}\":\"${value}\"\n`
 	})
-	res.send(allstu);
+	res.send(stulist);
 });
 
 app.get('/addstu', (req, res) => {
