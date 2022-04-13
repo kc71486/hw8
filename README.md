@@ -8,5 +8,5 @@ still testing
 v0.0.1 - upload testing files  
 v0.0.2 - test & debug  
 v0.0.3 - finish testing  
-v1.0.0 - finished all feature without testing
-
+v1.0.0 - finished all feature without testing  
+v1.0.1 - finished debug

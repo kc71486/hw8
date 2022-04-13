@@ -7,7 +7,7 @@ function setForms() {
 	};
 	document.getElementById("studentsearch_submit").onclick = (event) => {
 		event.preventDefault();
-		naiveRequest();
+		searchRequest();
 	};
 	document.getElementById("studentadd_submit").onclick = (event) => {
 		event.preventDefault();
@@ -28,19 +28,18 @@ function setForms() {
 	};
 }
 
-function naiveRequest() {
-  let xhttp = new XMLHttpRequest(), url="/searchstu?";
-	url += "id="+document.querySelector("#studentsearch [name=student_id]").value;
-  xhttp.open("GET", url, true);
-  xhttp.setRequestHeader('content-type',"text/html")
-  xhttp.send(null);
-  document.getElementById("studentsearch_show").innerHTML =  "_";
-  /*
+function searchRequest() {
+	let xhttp = new XMLHttpRequest(), url="/searchstu";
+	url += "?id="+document.querySelector("#studentsearch [name=student_id]").value;
+	xhttp.open("GET", url, true);
+	xhttp.setRequestHeader('content-type',"text/html")
+	xhttp.send(null);
+	/*
 	xhttp.open("POST", "/searchstu", true);
 	xhttp.setRequestHeader("content-type", "application/x-www-form-urlencoded");
 	xhttp.send("id=" + document.querySelector("#studentsearch [name=student_id]").values);
-  */
-  xhttp.onreadystatechange = function() {
+	*/
+	xhttp.onreadystatechange = function() {
 		if(xhttp.readyState == 4 && xhttp.status == 200) {
 			document.getElementById("studentsearch_show").innerHTML = xhttp.responseText;
 		}
