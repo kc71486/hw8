@@ -30,13 +30,14 @@ function setForms() {
 
 function naiveRequest() {
 	let xhttp = new XMLHttpRequest();
-	xhttp.onload = () => {
-		document.getElementById("studentadd_show").innerHTML = "hello, " + xhttp.responseText;
+	xhttp.open("POST", "/searchstu", true);
+	xhttp.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+	xhttp.send("id=" + document.querySelector("#studentsearch [name=student_id]").values);
+	xhttp.onreadystatechange = function() {
+		if(http.readyState == 4 && http.status == 200) {
+			document.getElementById("studentsearch_show").innerHTML = xhttp.responseText;
+		}
 	};
-	xhttp.open("GET", "/searchstu", true);
-	xhttp.send({
-		id: document.querySelector("#studentsearch [name=student_id]").value
-	});
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {

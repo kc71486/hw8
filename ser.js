@@ -30,7 +30,7 @@ app.get('/allstu', (req, res) => {
 });
 
 app.get('/searchstu', (req, res) => {
-	res.send(allstu[req.query.id]);
+	res.send("hello, " + allstu[req.query.id]);
 });
 
 app.get('/addstu', (req, res) => {
