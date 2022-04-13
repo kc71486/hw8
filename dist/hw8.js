@@ -7,6 +7,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			lname: $('#ajax-form [name=last_name]').val()
 		}, (data) => {
 			document.getElementById("ajax-output").innerHTML = data;
-		})
-	})
+		});
+	};
 });
