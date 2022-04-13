@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 
 var allstu = {};
 
-app.get('/helloname', (req, res) => {
+app.get('/allstu', (req, res) => {
   res.send(allstu);
 });
 
