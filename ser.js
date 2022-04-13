@@ -19,6 +19,13 @@ app.use(express.static(__dirname + '/dist'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+var allstu = {};
+
 app.get('/helloname', (req, res) => {
-  res.send(`Hello, ${req.query.fname} ${req.query.lname}`)
+  res.send(allstu);
+});
+
+app.get('/addstu', (req, res) => {
+  allstu[req.query.id] = req.query.name;
+  res.send(`added ${req.query.id} : ${req.query.name}`);
 });
