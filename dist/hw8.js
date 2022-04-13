@@ -29,12 +29,19 @@ function setForms() {
 }
 
 function naiveRequest() {
-	let xhttp = new XMLHttpRequest();
+  let xhttp = new XMLHttpRequest(), url="/searchstu?";
+	url += "id="+document.querySelector("#studentsearch [name=student_id]").value;
+  xhttp.open("GET", url, true);
+  xhttp.setRequestHeader('content-type',"text/html")
+  xhttp.send(null);
+  document.getElementById("studentsearch_show").innerHTML =  "_";
+  /*
 	xhttp.open("POST", "/searchstu", true);
 	xhttp.setRequestHeader("content-type", "application/x-www-form-urlencoded");
 	xhttp.send("id=" + document.querySelector("#studentsearch [name=student_id]").values);
-	xhttp.onreadystatechange = function() {
-		if(http.readyState == 4 && http.status == 200) {
+  */
+  xhttp.onreadystatechange = function() {
+		if(xhttp.readyState == 4 && xhttp.status == 200) {
 			document.getElementById("studentsearch_show").innerHTML = xhttp.responseText;
 		}
 	};
