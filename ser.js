@@ -20,5 +20,5 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get('/helloname', (req, res) => {
-  res.send(`Hello, ${req.body.fname} ${req.body.lname}`)
+  res.send(`Hello, ${req.query.fname} ${req.query.lname}`)
 });
