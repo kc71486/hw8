@@ -8,7 +8,4 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			document.getElementById("ajax-output").innerHTML = data;
 		});
 	};
-	setTimeout(() => {
-		document.getElementById("ajax-output").innerHTML = "loaded";
-	}, 3000)
 });
