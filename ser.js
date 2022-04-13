@@ -22,10 +22,14 @@ app.use(bodyParser.json());
 var allstu = {};
 
 app.get('/allstu', (req, res) => {
-  res.send(allstu);
+	let stulist = "";
+	Object.entries(allstu).forEach(([key, value]) => {
+		stulist += `\"${key}\":\"${value}\"\n`
+	})
+	res.send(allstu);
 });
 
 app.get('/addstu', (req, res) => {
-  allstu[req.query.id] = req.query.name;
-  res.send(`added ${req.query.id} : ${req.query.name}`);
+	allstu[req.query.id] = req.query.name;
+	res.send(`added ${req.query.id} : ${req.query.name}`);
 });
