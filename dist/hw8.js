@@ -29,7 +29,7 @@ function setForms() {
 }
 
 function naiveRequest() {
-	let xhttp = XMLHttpRequest();
+	let xhttp = new XMLHttpRequest();
 	xhttp.send({
 		id: document.querySelector("#studentsearch [name=student_id]").value
 	});
