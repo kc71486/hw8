@@ -19,6 +19,6 @@ app.use(express.static(__dirname + '/dist'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.post('/helloname', (req, res) => {
+app.get('/helloname', (req, res) => {
   res.send(`Hello, ${req.body.fname} ${req.body.lname}`)
 });
