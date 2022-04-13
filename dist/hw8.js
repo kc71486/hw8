@@ -30,13 +30,13 @@ function setForms() {
 
 function naiveRequest() {
 	let xhttp = new XMLHttpRequest();
+	xhttp.open("GET", "/searchstu", true);
 	xhttp.send({
 		id: document.querySelector("#studentsearch [name=student_id]").value
 	});
 	xhttp.onload = () => {
 		document.getElementById("studentadd_show").innerHTML = "hello, " + xhttp.responseText;
 	};
-	xhttp.open("GET", "/searchstu", true);
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
