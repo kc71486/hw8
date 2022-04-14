@@ -46,7 +46,12 @@ app.get('/allstu', (req, res) => {
 });
 
 app.get('/searchstu', (req, res) => {
-	res.send("hello, " + allstu[req.query.id]);
+  if(allstu.hasOwnProperty(req.query.id)) {
+    res.send("hello, " + allstu[req.query.id]);
+  }
+  else {
+    res.send("no such student");
+  }
 });
 
 app.post('/addstu', (req, res) => {
@@ -56,7 +61,12 @@ app.post('/addstu', (req, res) => {
 });
 
 app.post('/delstu', (req, res) => {
-	delete allstu[req.body.id];
-	saveJSON(jsonpath, allstu);
-	res.send(`deleted ${req.body.id}`);
+  if(allstu.hasOwnProperty(req.body.id)) {
+	  delete allstu[req.body.id];
+    saveJSON(jsonpath, allstu);
+    res.send(`deleted ${req.body.id}`);
+  }
+  else {
+    res.send("aborted, id not found");
+  }
 });
