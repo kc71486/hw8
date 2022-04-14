@@ -1,6 +1,6 @@
 # hw8
 
-week 8 homework - http &amp; ajax 
+week 8 homework - http &amp; ajax  
 feature:
 + list
 + search
