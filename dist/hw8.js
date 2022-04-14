@@ -38,7 +38,7 @@ function searchRequest() {
 }
 
 function deleterequest() {
-	let xhttp = new XMLHttpRequest(), url="/searchstu";
+	let xhttp = new XMLHttpRequest(), url="/delstu";
 	xhttp.open("POST", url, true);
 	xhttp.setRequestHeader("content-type", "application/x-www-form-urlencoded");
 	xhttp.send("id=" + document.querySelector("#studentdelete [name=student_id]").value);

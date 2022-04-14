@@ -34,11 +34,11 @@ app.get('/searchstu', (req, res) => {
 });
 
 app.post('/addstu', (req, res) => {
-	allstu[req.query.id] = req.query.name;
+	allstu[req.body.id] = req.body.name;
 	res.send(`added ${req.body.id} : ${req.body.name}`);
 });
 
 app.post('/delstu', (req, res) => {
-	delete allstu[req.query.id];
+	delete allstu[req.body.id];
 	res.send(`deleted ${req.body.id}`);
 });
