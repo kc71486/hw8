@@ -49,7 +49,7 @@ app.get('/searchstu', (req, res) => {
 	let message = {};
 	if(allstu.hasOwnProperty(req.query.id)) {
 		message.mode = 0;
-		message.name = req.query.id;
+		message.name = allstu[req.query.id];
 	} else {
 		message.mode = 1;
 	}
@@ -76,10 +76,10 @@ app.post('/addstu', (req, res) => {
 app.post('/delstu', (req, res) => {
 	let message = {};
 	if(allstu.hasOwnProperty(req.body.id)) {
+		message.name = req.body.id+":"+allstu[req.body.id];
 		delete allstu[req.body.id];
 		saveJSON(jsonpath, allstu);
 		message.mode = 0;
-		message.name = req.body.id;
 	} else {
 		message.mode = 1;
 	}
