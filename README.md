@@ -2,10 +2,10 @@
 
 week 8 homework - http &amp; ajax  
 feature:
-+ list
-+ search
-+ add
-+ remove
++ list - list all students
++ search - search student name by id
++ add - add a student or modify if id exists
++ remove - remove a student by id
 
 # server note
 server platform: nodejs  
@@ -19,4 +19,5 @@ v1.0.0 - finished all feature without testing
 v1.0.1 - bugs fix  
 v1.1.0 - changed method into 2 GET and 2 POST, untested  
 v1.1.1 - fixed bugs from POST
-v1.2.0 - added server storage system
+v1.2.0 - added server storage system  
+v1.2.1 - added respomse &amp; change data transferd

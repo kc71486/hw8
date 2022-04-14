@@ -57,17 +57,17 @@ app.get('/searchstu', (req, res) => {
 });
 
 app.post('/addstu', (req, res) => {
-	let message = {};
+	let message = {id:req.body.id};
 	if(allstu.hasOwnProperty(req.body.id)) {
 		message.oldName = allstu[req.body.id];
 		allstu[req.body.id] = req.body.name;
 		saveJSON(jsonpath, allstu);
-		message.mode = 0;
+		message.mode = 1;
 		message.newName = req.body.name;
 	} else {
 		allstu[req.body.id] = req.body.name;
 		saveJSON(jsonpath, allstu);
-		message.mode = 1;
+		message.mode = 0;
 		message.newName = req.body.name;
 	}
 	res.send(JSON.stringify(message));
