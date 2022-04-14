@@ -33,12 +33,12 @@ app.get('/searchstu', (req, res) => {
 	res.send("hello, " + allstu[req.query.id]);
 });
 
-app.get('/addstu', (req, res) => {
+app.post('/addstu', (req, res) => {
 	allstu[req.query.id] = req.query.name;
-	res.send(`added ${req.query.id} : ${req.query.name}`);
+	res.send(`added ${req.body.id} : ${req.body.name}`);
 });
 
-app.get('/delstu', (req, res) => {
+app.post('/delstu', (req, res) => {
 	delete allstu[req.query.id];
-	res.send(`deleted ${req.query.id}`);
+	res.send(`deleted ${req.body.id}`);
 });

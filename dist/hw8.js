@@ -11,7 +11,7 @@ function setForms() {
 	};
 	document.getElementById("studentadd_submit").onclick = (event) => {
 		event.preventDefault();
-		$.get('/addstu', {
+		$.post('/addstu', {
 			id: document.querySelector("#studentadd [name=student_id]").value,
 			name: document.querySelector("#studentadd [name=student_name]").value
 		}, (data) => {
@@ -20,11 +20,7 @@ function setForms() {
 	};
 	document.getElementById("studentdelete_submit").onclick = (event) => {
 		event.preventDefault();
-		$.get('/delstu', {
-			id: document.querySelector("#studentdelete [name=student_id]").value,
-		}, (data) => {
-			document.getElementById("studentdelete_show").innerHTML = data;
-		});
+		deleterequest();
 	};
 }
 
@@ -34,14 +30,21 @@ function searchRequest() {
 	xhttp.open("GET", url, true);
 	xhttp.setRequestHeader('content-type',"text/html")
 	xhttp.send(null);
-	/*
-	xhttp.open("POST", "/searchstu", true);
-	xhttp.setRequestHeader("content-type", "application/x-www-form-urlencoded");
-	xhttp.send("id=" + document.querySelector("#studentsearch [name=student_id]").values);
-	*/
 	xhttp.onreadystatechange = function() {
-		if(xhttp.readyState == 4 && xhttp.status == 200) {
+		if(xhttp.readyState == 4 && Math.floor(xhttp.status/100) == 2) {
 			document.getElementById("studentsearch_show").innerHTML = xhttp.responseText;
+		}
+	};
+}
+
+function deleterequest() {
+	let xhttp = new XMLHttpRequest(), url="/searchstu";
+	xhttp.open("POST", url, true);
+	xhttp.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+	xhttp.send("id=" + document.querySelector("#studentdelete [name=student_id]").value);
+	xhttp.onreadystatechange = function() {
+		if(xhttp.readyState == 4 && Math.floor(xhttp.status/100) == 2) {
+			document.getElementById("studentdelete_show").innerHTML = xhttp.responseText;
 		}
 	};
 }
