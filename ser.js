@@ -4,8 +4,10 @@ import express from 'express'
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import bodyParser from 'body-parser'
+import { createRequire } from 'module'
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+const require = createRequire(import.meta.url);
 const jsonpath = "students.json";
 
 const app = express();
@@ -21,16 +23,22 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 function saveJSON(src, obj) {
-	let tmp = JSON.stringify(obj), fs = require('fs');
-	fs.writeFile(src, tmp, function(err) {
+	let tmp = JSON.stringify(obj), fs = require(fs);
+	fs.writefile(jsonpath, tmp, function (err) {
 		if (err) {
 			console.log(err);
 		}
 	});
 }
 function loadJSON(src) {
-	let tmp = require(src);
-	return JSON.parse(tmp);
+	let out, fs = require(fs);
+	fs.readFile(jsonpath, function (err,data) {
+		if (err) {
+			return console.log(err);
+		}
+		out = JSON.parse(data.toString());
+	});
+	return out;
 }
 
 var allstu = loadJSON(jsonpath);
