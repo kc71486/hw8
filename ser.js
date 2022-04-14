@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 function saveJSON(src, obj) {
-  let tmp = JSON.stringify(obj), fs = require('fs');
+	let tmp = JSON.stringify(obj), fs = require('fs');
 	fs.writeFile(jsonpath, tmp, function (err) {
 		if (err) {
 			console.log(err);
@@ -31,15 +31,15 @@ function saveJSON(src, obj) {
 	});
 }
 function loadJSON(src) {
-	return require("./students.json");
+	return require("students.json");
 }
 
 var allstu = loadJSON(jsonpath);
 
 app.get('/allstu', (req, res) => {
 	let stulist = "";
-  //use cache
-  Object.entries(allstu).forEach(([key, value]) => {
+	//var == file, so use var(and avoid file cache)
+	Object.entries(allstu).forEach(([key, value]) => {
 		stulist += `\"${key}\":\"${value}\"<br>`
 	})
 	res.send(stulist);
