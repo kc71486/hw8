@@ -46,17 +46,42 @@ app.get('/allstu', (req, res) => {
 });
 
 app.get('/searchstu', (req, res) => {
-	res.send("hello, " + allstu[req.query.id]);
+	let message = {};
+	if(allstu.hasOwnProperty(req.query.id)) {
+		message.mode = 0;
+		message.name = allstu[req.query.id];
+	} else {
+		message.mode = 1;
+	}
+	res.send(JSON.stringify(message));
 });
 
 app.post('/addstu', (req, res) => {
-	allstu[req.body.id] = req.body.name;
-	saveJSON(jsonpath, allstu);
-	res.send(`added ${req.body.id} : ${req.body.name}`);
+	let message = {id:req.body.id};
+	if(allstu.hasOwnProperty(req.body.id)) {
+		message.oldName = allstu[req.body.id];
+		allstu[req.body.id] = req.body.name;
+		saveJSON(jsonpath, allstu);
+		message.mode = 1;
+		message.newName = req.body.name;
+	} else {
+		allstu[req.body.id] = req.body.name;
+		saveJSON(jsonpath, allstu);
+		message.mode = 0;
+		message.newName = req.body.name;
+	}
+	res.send(JSON.stringify(message));
 });
 
 app.post('/delstu', (req, res) => {
-	delete allstu[req.body.id];
-	saveJSON(jsonpath, allstu);
-	res.send(`deleted ${req.body.id}`);
+	let message = {};
+	if(allstu.hasOwnProperty(req.body.id)) {
+		message.name = req.body.id+":"+allstu[req.body.id];
+		delete allstu[req.body.id];
+		saveJSON(jsonpath, allstu);
+		message.mode = 0;
+	} else {
+		message.mode = 1;
+	}
+	res.send(JSON.stringify(message));
 });
