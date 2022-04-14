@@ -57,7 +57,8 @@ function addRequest() {//post + jquery
 		if(message.mode === 0) {
 			showArea.innerHTML = `added ${message.id} : ${message.newName}`;
 		} else if(message.mode === 1) {
-			showArea.innerHTML = "changed from"+message.id+" : "+message.oldName+"\ninto "+message.id+" : "message.newName;
+			showArea.innerHTML = "changed from"+message.id+" : "+message.oldName+
+								"\ninto "+message.id+" : "+message.newName;
 		} else {
 			alert("unknown error in searchRequest()");
 		}
