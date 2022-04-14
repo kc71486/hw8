@@ -46,27 +46,42 @@ app.get('/allstu', (req, res) => {
 });
 
 app.get('/searchstu', (req, res) => {
-  if(allstu.hasOwnProperty(req.query.id)) {
-    res.send("hello, " + allstu[req.query.id]);
-  }
-  else {
-    res.send("no such student");
-  }
+	let message = {};
+	if(allstu.hasOwnProperty(req.query.id)) {
+		message.mode = 0;
+		message.name = req.query.id;
+	} else {
+		message.mode = 1;
+	}
+	res.send(JSON.stringify(message));
 });
 
 app.post('/addstu', (req, res) => {
-	allstu[req.body.id] = req.body.name;
-	saveJSON(jsonpath, allstu);
-	res.send(`added ${req.body.id} : ${req.body.name}`);
+	let message = {};
+	if(allstu.hasOwnProperty(req.body.id)) {
+		message.oldName = allstu[req.body.id];
+		allstu[req.body.id] = req.body.name;
+		saveJSON(jsonpath, allstu);
+		message.mode = 0;
+		message.newName = req.body.name;
+	} else {
+		allstu[req.body.id] = req.body.name;
+		saveJSON(jsonpath, allstu);
+		message.mode = 1;
+		message.newName = req.body.name;
+	}
+	res.send(JSON.stringify(message));
 });
 
 app.post('/delstu', (req, res) => {
-  if(allstu.hasOwnProperty(req.body.id)) {
-	  delete allstu[req.body.id];
-    saveJSON(jsonpath, allstu);
-    res.send(`deleted ${req.body.id}`);
-  }
-  else {
-    res.send("aborted, id not found");
-  }
+	let message = {};
+	if(allstu.hasOwnProperty(req.body.id)) {
+		delete allstu[req.body.id];
+		saveJSON(jsonpath, allstu);
+		message.mode = 0;
+		message.name = req.body.id;
+	} else {
+		message.mode = 1;
+	}
+	res.send(JSON.stringify(message));
 });
