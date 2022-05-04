@@ -8,6 +8,7 @@ import { createRequire } from 'module'
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const require = createRequire(import.meta.url);
+const Console = require("node:console");
 const jsonpath = "./students.json";
 
 const app = express();
@@ -31,6 +32,8 @@ function saveJSON(src, obj) {
 	});
 }
 function loadJSON(src) {
+	console.log("load");
+	Console.log("load2");
 	return require(src);
 }
 
