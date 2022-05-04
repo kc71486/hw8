@@ -8,7 +8,6 @@ import { createRequire } from 'module'
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const require = createRequire(import.meta.url);
-const { Console } = console;
 const jsonpath = "./students.json";
 
 const app = express();
@@ -33,13 +32,13 @@ function saveJSON(src, obj) {
 }
 function loadJSON(src) {
 	console.log("load");
-	Console.log("load2");
 	return require(src);
 }
 
 var allstu = loadJSON(jsonpath);
 
 app.get('/allstu', (req, res) => {
+	console.log("allstu");
 	let stulist = "";
 	//var == file, so use var(and avoid file cache)
 	Object.entries(allstu).forEach(([key, value]) => {
